@@ -1,7 +1,15 @@
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class InvoiceServiceTest {
+    InvoiceGenerator invoiceGenerator = null;
+
+    @Before
+    public void setUp() {
+        invoiceGenerator = new InvoiceGenerator();
+    }
+
     @Test
     public void givenDistanceAndTime_ShouldReturnTotalFare(){
         InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
@@ -28,5 +36,13 @@ public class InvoiceServiceTest {
         };
         double fare = invoiceGenerator.calculateFare(rides);
         Assert.assertEquals(84, fare, 0.0);
+    }
+
+    @Test
+    public void givenMultipleRides_WhenCalculated_ReturnInvoiceSummery() {
+        Ride[] rides = { new Ride(25, 30), new Ride(12, 20) };
+        InvoiceSummary invoiceSummary = invoiceGenerator.getInvoiceSummary(rides);
+        InvoiceSummary summary = new InvoiceSummary(2, 420);
+        Assert.assertEquals(summary, invoiceSummary);
     }
 }
