@@ -4,5 +4,7 @@ RideRepository.java
  RideRepository
 InvoiceGenerator.java
  InvoiceGenerator
+CabRide.java
+ CabRide
 InvoiceSummary.java
  InvoiceSummary
