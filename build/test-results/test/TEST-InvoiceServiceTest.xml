@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="InvoiceServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-20T05:16:51" hostname="DESKTOP-BS45UV7" time="0.008">
+<testsuite name="InvoiceServiceTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-06-22T04:18:54" hostname="DESKTOP-BS45UV7" time="0.052">
   <properties/>
-  <testcase name="givenMultipleRides_WhenCalculated_ReturnInvoiceSummery" classname="InvoiceServiceTest" time="0.008"/>
+  <testcase name="givenMultipleRides_shouldReturnInvoiceSummary" classname="InvoiceServiceTest" time="0.039"/>
+  <testcase name="givenLessDistanceAndTime_shouldReturnMinFare" classname="InvoiceServiceTest" time="0.001"/>
+  <testcase name="givenDistanceAndTime_ShouldReturnTotalFare" classname="InvoiceServiceTest" time="0.0"/>
+  <testcase name="givenUserId_shouldReturnInvoiceSummary" classname="InvoiceServiceTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

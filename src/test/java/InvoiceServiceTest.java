@@ -3,7 +3,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class InvoiceServiceTest {
-    InvoiceGenerator invoiceGenerator = null;
+    InvoiceGenerator invoiceGenerator =null;
 
     @Before
     public void setUp() {
@@ -11,38 +11,39 @@ public class InvoiceServiceTest {
     }
 
     @Test
-    public void givenDistanceAndTime_ShouldReturnTotalFare(){
-        InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+    public void GivenDistanceAndTime_ShouldReturnTotalFare() {
         double distance = 2.0;
         int time = 5;
         double fare = invoiceGenerator.calculateFare(distance, time);
-        Assert.assertEquals(25,fare,0.0);
+        Assert.assertEquals(25, fare, 0.0);
     }
 
     @Test
-    public void givenDistanceOrTime_ShouldReturnMinFare(){
-        InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+    public void GivenLessDistanceAndTime_ShouldReturnMinFare() {
         double distance = 0.1;
         int time = 1;
-        double fare = invoiceGenerator.calculateFare(distance, time);
-        Assert.assertEquals(5,fare,0.0);
+        double fare= invoiceGenerator.calculateFare(distance, time);
+        Assert.assertEquals(5, fare, 0.0);
     }
 
     @Test
-    public void givenMultipleRides_shouldReturnTotalFare() {
-        InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
-        Ride[] rides = { new Ride(2.0, 5),
-                new Ride(0.1, 1) , new Ride (5.0, 4)
+    public void GivenMultipleRides_ShouldReturnInvoiceSummary() {
+        Ride[] rides = { new Ride(2.0, 5), new Ride(5.0,4),
+                new Ride(0.1, 1)
         };
-        double fare = invoiceGenerator.calculateFare(rides);
-        Assert.assertEquals(84, fare, 0.0);
+        InvoiceSummary summary = invoiceGenerator.calculateFare(rides);
+        InvoiceSummary expectedInvoiceSummary= new InvoiceSummary(3, 84.0);
+        Assert.assertEquals(expectedInvoiceSummary, summary);
     }
 
     @Test
-    public void givenMultipleRides_WhenCalculated_ReturnInvoiceSummery() {
-        Ride[] rides = { new Ride(25, 30), new Ride(12, 20) };
-        InvoiceSummary invoiceSummary = invoiceGenerator.getInvoiceSummary(rides);
-        InvoiceSummary summary = new InvoiceSummary(2, 420);
-        Assert.assertEquals(summary, invoiceSummary);
+    public void GivenUserId_ShouldReturnInvoiceSummary() {
+        String userID = "abc@gmail.com";
+        Ride[] rides = { new Ride(2.0,5), new Ride(5.0,4),
+                new Ride(0.1,1)};
+        invoiceGenerator.addRides(userID,rides);
+        InvoiceSummary summary=invoiceGenerator.calculateFare(rides, "normal");
+        InvoiceSummary invoiceSummary = invoiceGenerator.getInvoiceSummary(userID);
+        Assert.assertEquals(invoiceSummary, summary);
     }
 }
